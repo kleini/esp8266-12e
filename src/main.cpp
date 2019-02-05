@@ -8,12 +8,10 @@ const int PIN_LED = 2;
 void onHomieEvent(const HomieEvent& event) {
   switch(event.type) {
     case HomieEventType::MQTT_READY:
-      Homie.getLogger() << "MQTT connected, preparing for deep sleep..." << endl;
       Homie.prepareToSleep();
       break;
     case HomieEventType::READY_TO_SLEEP:
-      Homie.getLogger() << "Ready to sleep" << endl;
-      Homie.doDeepSleep(60*1000000, RFMode::RF_DISABLED);
+      Homie.doDeepSleep(60*1000000);
       break;
     default:
       break;
@@ -25,8 +23,10 @@ void setup() {
   Serial << endl << endl;
 
   // WiFi does not connect properly after being woken up from deep sleep.
-  // Disconnecting solves this issue.
-  WiFi.disconnect();
+  // Trying different things to solve this.
+  // WiFi.disconnect();
+  WiFi.forceSleepWake();
+  // WiFi.mode(WiFiMode::WIFI_OFF);
 
   Homie_setFirmware(FW_NAME, FW_VERSION);
   Homie.setLedPin(PIN_LED, LOW);
