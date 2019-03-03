@@ -7,10 +7,10 @@
 
 const int PIN_LED = 2;
 const int PIN_DHT = 13;
-const int PIN_DS = 15;
+const int PIN_DS = 4;
 
-DHT22Node dht22("dht22", PIN_DHT, 50);
 DS18B20Node ds18b20("ds18b20", PIN_DS, 50);
+DHT22Node dht22("dht22", PIN_DHT, 50);
 
 void onHomieEvent(const HomieEvent& event) {
   switch(event.type) {
