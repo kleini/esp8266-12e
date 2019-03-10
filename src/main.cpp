@@ -29,6 +29,9 @@ void setup() {
   Serial.begin(115200);
   Serial << endl << endl;
 
+  pinMode(PIN_LED, OUTPUT);
+  pinMode(PIN_DHT, INPUT);
+
   // WiFi does not connect properly after being woken up from deep sleep.
   // Trying different things to solve this.
   // WiFi.disconnect();
